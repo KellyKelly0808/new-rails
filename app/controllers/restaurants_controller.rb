@@ -2,6 +2,12 @@ class RestaurantsController < ApplicationController
   
     def index
     end 
+
+    def new
+    end
+
+    def list
+    end
 end   
 
   # 可以很多個controller都繼承  ApplicationController，而重複功能可以寫在 ApplicationController，比較方便
