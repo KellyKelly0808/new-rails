@@ -6,8 +6,13 @@ class RestaurantsController < ApplicationController
     def new
     end
 
-    def list
+    def list 
+      # 寫入資料庫
+      # redirect -> 列表頁   (轉址到餐廳列表)
+      # render html: "title is #{params[:title]}"
+      redirect_to'/restaurants'
     end
+
 end   
 
   # 可以很多個controller都繼承  ApplicationController，而重複功能可以寫在 ApplicationController，比較方便
