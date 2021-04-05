@@ -1,33 +1,33 @@
 <h1>新增餐廳</h1>
  
-<%= form_for(Restaurant.new) do |f| %>
+<%= form_for(@restaurant) do |f| %>
+<div class="field">
+  <%= f.label :title %>
+<%= f.text_field :title %>
+</div>
+
+<div class="field">
+<%= f.label :tel %>
+<%= f.text_field :tel %>
+</div>
+
+<div class="field">
+<%= f.label :email %>
+<%= f.text_field :email %>
+</div>
+
+<div class="field">
+<%= f.label :address %>
+<%= f.text_field :address %>
+</div>
+
+<div class="field">
+<%= f.label :description %>
+<%= f.text_area :description %>
+</div>
+
+<%= f.submit'新增' %>
+<% end %>
 
 
-<form action=" /restaurant_list" method="post">
-    
-   <input type="hidden"
-          name="authenticity_token"
-          value="<%= form_authenticity_token %>">
-          <!-- name="authenticity_token" rails內建 作保護不被灌票的機制 -->
-    <label for="title">title</label>
-    <input type="text" name="title" id="title">
-    <br>
-   <!-- 後端是看name  另 id是前端在用的 兩個名字不一定要一樣 -->
-    <label for="address">address</label>
-    <input type="text" name="address" id="address">
-    <br>
-
-    <label for="tel">tel</label>
-    <input type="tel" name="tel" id="tel">
-      <br>
-
-    <label for="email">email</label>
-    <input type="email" name="email" id="email">
-    <br>
- 
-    <label for="description">description</label>
-    <textarea name="description"></textarea>
-    <br>
-    <input type="submit" value="新增">
-    </form>
     
