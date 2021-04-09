@@ -1,42 +1,7 @@
 <h1>編輯餐廳</h1>
 
-<%= form_for(@restaurant) do |f| %>
+<%= render 'hello', restaurant: @restaurant %>
 
-    <% if @restaurant.errors.any? %>
-    <ul>
-      <%  @restaurant.errors.full_messages.each do |message| %>
-      <li><%= message %></li>
-      <% end %>
-    </ul>
-    <% end %>
-    
-    <div class="field">
-      <%= f.label :title %>
-    <%= f.text_field :title, placeholder: '請輸入名稱' %>
-    </div>
-    
-    <div class="field">
-    <%= f.label :tel %>
-    <%= f.text_field :tel %>
-    </div>
-    
-    <div class="field">
-    <%= f.label :email %>
-    <%= f.text_field :email %>
-    </div>
-    
-    <div class="field">
-    <%= f.label :address %>
-    <%= f.text_field :address %>
-    </div>
-    
-    <div class="field">
-    <%= f.label :description %>
-    <%= f.text_area :description %>
-    </div>
-    
-    <%= f.submit %>
-    <% end %>
-    
-    
-        
+#partial render(局部渲染)
+#在 controller是完整的渲染  在這裡的渲染是去找底線開頭的檔案
+#這裡的render是 視圖小幫手 和 controller裡的render不一樣唷
