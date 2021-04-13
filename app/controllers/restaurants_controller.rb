@@ -3,8 +3,10 @@ class RestaurantsController < ApplicationController
  
   
     def index
-      @restaurants = Restaurant.all.order(id: :desc)
-                                      #  :desc最新建立的會排在最上面
+      # @restaurants = Restaurant.where(deleted_at: nil)
+      # 只要刪除欄時間戳記是空的就顯示出來!!
+      @restaurants = Restaurant.all
+                                      
     end 
 
     def show
@@ -48,6 +50,7 @@ class RestaurantsController < ApplicationController
     def destroy
       
       @restaurant.destroy
+      # @restaurant.update(deleted_at: Time.now)
       redirect_to restaurants_path
     end
 
