@@ -8,9 +8,10 @@ class SessionsController < ApplicationController
         # email = user_params[:email]
         # password = user_params[:password]
 
-        if User.hello(user_params)
+        if User.login(user_params)
             #發號碼牌
             #轉去首頁
+            redirect_to root_path
         else
             redirect_to sign_in_sessions_path
         end

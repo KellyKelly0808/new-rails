@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+    require 'digest'
     validates :email, presence: true,
                       uniqueness: true,
                       format: {with: /.+\@.+\..+/ }
@@ -7,23 +8,28 @@ class User < ApplicationRecord
 
    before_create :encrypt_password                      
 
-   def self.hello(params)
+   def self.login(params)
     email = params[:email]
     password = params[:password]
 
-    encrypt_password =  Digest::SHA1.hexdigest("123#{password}xx")
+    salted_password = salted(password)
+    encrypted_password = encrypted(salted_password)
 
-    find_by(email :email, password: encrypt_password)
+    find_by(email: email, password: encrypt_password)
+   
    end
 
     private
         def encrypt_password
-            #加密
-            require 'digest'
-            self.password = Digest::SHA1.hexdigest(salted_pwd)
+             salted_pwd = salted(password)
+            self.password = encrypt(salted_pwd)
         end
 
-    def salted_pwd
-        "123#{self.password}xx"
+    def encrypt(password)
+        Digest::SHA1.hexdigest(password)
+    end
+
+    def salted(password)
+        "123#{password}xx"
     end
 end
