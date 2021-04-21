@@ -1,13 +1,13 @@
 
 
-module Hasher
+module Encryptor
     require 'digest'
     def self.encrypt(password)
         Digest::SHA1.hexdigest(password)
     end
 
-    def self.salted(password)
-        "123#{password}xx"
+    def self.salted(password, head = '123', tail = 'xx')
+        "#{head}#{password}#{tail}"
     end
 end
 
@@ -24,8 +24,8 @@ class User < ApplicationRecord
     email = params[:email]
     password = params[:password]
 
-    salted_password = Hasher.salted(password)
-    encrypt_password = Hasher.encrypt(salted_password)
+    salted_password = Encryptor.salted(password)
+    encrypt_password = Encryptor.encrypt(salted_password)
 
     find_by(email: email, password: encrypt_password)
    
@@ -33,8 +33,8 @@ class User < ApplicationRecord
 
     private
         def encrypt_password
-             salted_pwd = Hasher.salted(password)
-            self.password = Hasher.encrypt(salted_pwd)
+             salted_pwd = Encryptor.salted(password)
+            self.password = Encryptor.encrypt(salted_pwd)
         end
 
    

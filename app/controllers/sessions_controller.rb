@@ -7,9 +7,10 @@ class SessionsController < ApplicationController
     def create
         # email = user_params[:email]
         # password = user_params[:password]
-
-        if User.login(user_params)
+        user = User.login(user_params)
+        if user 
             #發號碼牌
+            session[:thankyou9527] = user.id
             #轉去首頁
             redirect_to root_path
         else
