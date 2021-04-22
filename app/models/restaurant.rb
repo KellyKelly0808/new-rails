@@ -2,6 +2,8 @@ class Restaurant < ApplicationRecord
     validates :title, presence: true
     validates :email, presence: true, uniqueness: true
 
+    belongs_to :user
+
     default_scope { available }
     scope :available, -> { where(deleted_at: nil) }
    

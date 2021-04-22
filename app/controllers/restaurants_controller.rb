@@ -1,7 +1,7 @@
 class RestaurantsController < ApplicationController
      before_action :find_restaurant, only: [:show, :edit, :update, :destroy]
- 
-  
+     before_action :check_user!, except: [:index, :show]
+    
     def index
       # @restaurants = Restaurant.where(deleted_at: nil)
       # 只要刪除欄時間戳記是空的就顯示出來!!
@@ -20,11 +20,7 @@ class RestaurantsController < ApplicationController
     end
 
     def new
-        # if not session[:thankyou9527]
-        #   redirect_to root_path
-        # else
         @restaurant = Restaurant.new
-        # end
     end
 
     def create
@@ -67,8 +63,11 @@ class RestaurantsController < ApplicationController
         params.require(:restaurant).permit(:title, :tel, :address, :email, :description)
       end
 
-     
+      # def current_user
+      #   User.find_by(id: session[ENV['session_name']])
+      # end
 
+     
 end   
 
 
