@@ -1,5 +1,5 @@
 class RestaurantsController < ApplicationController
-     before_action :find_restaurant, only: [:show, :edit, :update, :destroy]
+     before_action :find_restaurant, only: [:edit, :update, :destroy]
      before_action :check_user!, except: [:index, :show]
     
     def index
@@ -10,6 +10,7 @@ class RestaurantsController < ApplicationController
     end 
 
     def show
+      @restaurant = Restaurant.find(params[:id])
       # begin
    
         #  Exception例外
@@ -25,7 +26,9 @@ class RestaurantsController < ApplicationController
 
     def create
         # 寫入資料庫
-       @restaurant = Restaurant.new(restaurant_params)
+      #  @restaurant = Restaurant.new(restaurant_params)
+      #  @restaurant.user_id = current_user.id
+      @restaurant = current_user.restaurants.new(restaurant_params)
 
         if @restaurant.save
           redirect_to restaurants_path
@@ -55,8 +58,17 @@ class RestaurantsController < ApplicationController
     end
 
     private
+      # authentication 驗證(你有沒有登入)
+      #  authorization 授權(你可不可做這件事情)
       def find_restaurant
-        @restaurant =  Restaurant.find(params[:id])
+        # @restaurant =  Restaurant.find(params[:id])
+        # 1
+        # @restaurant = Restaurant.find_by!(
+        #  id: params[:id],
+        #  user_id: current_user.id
+        #  )
+        #  2
+        @restaurant = current_user.restaurants.find(params[:id])
       end
 
       def restaurant_params
