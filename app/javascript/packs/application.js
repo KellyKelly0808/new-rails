@@ -12,4 +12,6 @@ Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
 
+import 'icon/fontawesome'
 import '../frontend/hello.js'
+import '../style/index.js'
