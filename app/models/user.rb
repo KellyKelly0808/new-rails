@@ -20,8 +20,10 @@ class User < ApplicationRecord
 
    before_create :encrypt_password                      
 
-#    has_many :restaurants
+    has_many :restaurants #owner
    has_many :favorite_restaurants
+   has_many :pocket_list, through: :favorite_restaurants,source: :restaurant
+                                  
    has_many :comments
 
    def self.login(params)
