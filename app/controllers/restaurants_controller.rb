@@ -1,6 +1,7 @@
 class RestaurantsController < ApplicationController
      before_action :find_restaurant, only: [:edit, :update, :destroy]
      before_action :check_user!, except: [:index, :show, :hello]
+    #  skip_before_action :verify_authenticity_token, only: [:pocket_list]
     
     def index
       # @restaurants = Restaurant.where(deleted_at: nil)
@@ -20,6 +21,10 @@ class RestaurantsController < ApplicationController
       # rescue
       #   redirect_to restaurants_path
       # end                                      
+    end
+
+    def pocket_list
+      render json: params
     end
 
     def new
