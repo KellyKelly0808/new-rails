@@ -15,6 +15,9 @@ Rails.application.routes.draw do
     end
 
     resources :restaurants do
+        member do
+         post :pocket_list #restaurants#pocket_list
+        end 
       resources :comments, shallow: true,
                              only: [:create, :destroy]
       # resources :comments, only: [:index, :new, :create]

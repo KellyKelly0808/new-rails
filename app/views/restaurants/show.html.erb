@@ -1,7 +1,7 @@
 <h1>
 <%= @restaurant.title %>
 <i class="far fa-thumbs-up"></i>
-<div class="like-btn"></div>
+<div id="like-btn" class="like-btn like-btn-favorited"></div>
 </h1>
 <h3>留言</h3>
 <%= form_for(@comment, url: restaurant_comments_path(@restaurant), remote: true) do |form| %>
